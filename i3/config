@@ -1,0 +1,278 @@
+#i3 config
+
+#===$mod key===mod键，mod4一般就是super或者win键。
+set $mod Mod4
+
+#===programs shortcut===快捷键
+
+# terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# dmenu
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+
+# browsers-浏览器
+bindsym $mod+Shift+c exec chromium
+bindsym $mod+Shift+f exec firefox
+
+# printscreen-使用scrot工具截屏，Print是键盘上的PrtSc（PrintScreen键）
+bindsym $mod+Print exec scrot
+
+# GUI file manager-文件管理器
+bindsym $mod+e exec --no-startup-id pcmanfm
+
+
+#===autostart programs===自启动软件，一般这些软件名字都是小写，可在/usr/share/applications里面查看程序的实际名字。示例：
+exec --no-startup-id mate-power-manager
+exec --no-startup-id fluxgui
+exec --no-startup-id fcitx
+exec --no-startup-id megasync
+exec --no-startup-id nutstore
+exec --no-startup-id firefox
+exec --no-startup-id ss-qt5
+
+#===theme===
+
+# wallpaper-设定壁纸图片。
+#exec --no-startup-id feh --bg-scale "~/Pictures/wallpapaer/wallpaper.jpg"
+
+#随机更换壁纸（使用脚本~/.config/i3/wallpaper.sh来设置随机更换壁纸）。
+feh--automatically change wallpaerexec ~/.config/i3/wallpaper.sh &
+
+# transparent-须安装xcompgr，可用于终端透明。
+exec --no-startup-id xcompmgr &
+
+# font-字体及其大小
+font pango:monospace 18
+
+#---bar
+
+# tray_output-托盘图标显示，eDP1是显示设备名字，可用xrandr命令查看。示例：
+exec --no-startup-id xrandr --output eDP1 --primary
+
+# 如还外接其他屏幕。示例：屏幕为HDMI1，分辨率指定成1920*1080 并用--right-of （或者 --left-of）指定屏幕显示的左右位置。
+# exec --no-startup-id xrandr --output HDMI1 1920*1080 --right-of eDP1
+
+bar {
+    status_command i3status
+    #bar的位置 top 或者 bottom
+    position top
+    #bar的显示方式，可以不设置使其一直显示，设置为hide在按下$mod键才会出现。
+    mode hide
+    workspace_buttons yes
+    #eDP1同上，需要托盘图标必须设置output。
+    output eDP1
+    tray_output primary
+    tray_padding 0
+    separator_symbol "|"
+
+#bar的配色
+    colors {
+	background #285477
+	statusline #dedede
+	separator #2d2d2d
+        	focused_workspace #636e88 #285de7 #dedfdg
+        	active_workspace #556677 #234567 #56ef67
+        	inactive_workspace #636d72 #2d2d2d #dedede
+        	urgent_workspace #ffffff #900000 #d23d32
+    }
+}
+
+#---window style-窗口配色
+
+# focused/unfocused window
+# widow status----------------border----bgc----content-prompt
+client.focused                     #1793d0 #1793d0 #ffffff #333333
+client.focused_inactive    #000000 #333333 #ffffff #3399ff
+client.unfocused                #000000 #333333 #ffffff #3399ff
+client.urgent                       #ff0000 #ff0000 #ff0000 #999900
+client.placeholder             #000000 #000000 #ffffff #000000
+client.background             #ffffff
+
+# popup-弹出窗口（如通知）
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# float programs-需要浮动的程序（打开程序默认浮动动），此处软件名字大小写要求严格可在/usr/share/applictions里面右键查看程序指向的bin文件名字。
+for_window [class="Gpicview"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Xarchiver"] floating enable
+for_window [class="Genymotion"] floating enable
+for_window [class="Vlc"] floating enable
+for_window [class="VirtualBox"] floating enable
+for_window [class="shadowsocks-qt5"] floating enable
+
+
+# new window-新打开窗口的风格
+new_window none
+new_float normal
+hide_edge_borders both
+
+#===window control===
+# Use Mouse and $mod to drag floating windows-使用$mod+鼠标左键拖动窗口
+floating_modifier $mod
+
+# kill focused window-关闭窗口
+bindsym mod1+F4 kill
+
+# hide | show window-隐藏和再现窗口
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+
+#---change window's border style-更改窗口风格
+#no border:none | normal | 1pixel:one pixel border-普通/无边框/1像素边框
+bindsym $mod+n border normal
+bindsym $mod+u border none
+bindsym $mod+o border 1pixel
+
+# toggle border style(normal|none|1px)-在上面三种风格中切换
+bindsym $mod+b border toggle
+
+#---focus-焦点
+#焦点跟随鼠标
+focus_follows_mouse yes
+
+# change focus
+bindsym $mod+Shift+h focus left
+bindsym $mod+Shift+j down
+bindsym $mod+Shift+k focus up
+bindsym $mod+Shift+l focus right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# move focused window-移动焦点窗口
+bindsym $mod+h move left
+bindsym $mod+j move down
+bindsym $mod+k move up
+bindsym $mod+l move right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# split in horizontal orientation
+bindsym $mod+mod1+h split h
+# split in vertical orientation-上下拆分窗口
+bindsym $mod+v split v
+
+# fullscreen mode for the focused container-全屏
+bindsym $mod+f fullscreen toggle
+
+# change container layout-窗口布局风格
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+#在上面两种风格（堆叠和标签）中切换
+bindsym $mod+c layout toggle split
+
+# toggle tiling / floating-浮动当前窗口或者从浮动变为平铺
+bindsym $mod+Shift+space floating toggle
+
+#===workspace===
+
+# Workspace names
+#workspace "1:Arch" output eDP1
+#workspace "2:Web" output eDP1
+#workspace "3:Code" output eDP1
+#workspace "9:Mail" output eDP1
+
+#---switch workspace-切换工作区
+# 10switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# switch to near workspace-相邻工作区切换
+bindsym $mod+Tab workspace next
+bindsym mod1+Tab workspace prev
+
+# assign-将某程序打开后放置到指定工作区
+assign [class="Firefox"] 2
+assign [class="Atom"] 3
+assign [class="Thunderbird"]5
+
+# move focused container to workspace-移动到指定工作区
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+# resize window (you can also use the mouse for that)-窗口大小调整$mod+r进入调整，enter结束调整。
+mode "resize" {
+
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# ====volume control-音量调整，键盘上Fn+音量键
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2dB- unmute
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+
+# ===power-manager-按下$mod+Shift+q mode后，按l/e/r/p分别代表锁屏、退出、重启和关机。
+
+set $mode_system select: lock(L) exit(E) reboot(R) poweroff(O) cancel(Esc)
+bindsym $mod+Shift+q mode "$mode_system"
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock -c '#000000', mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym o exec --no-startup-id systemctl poweroff, mode "default"
+    bindsym Escape mode "default"
+}
+
+# turn off screen | sleep | shutdown-300秒关闭屏幕
+exec --no-startup-id xset dpms 300
+
+#===i3lock===i3锁屏，锁屏壁纸路径需要引号。
+    mode "i3lock: Return to lock/Escape to Cancel" {
+            bindsym Return mode "default" exec i3lock -I 600 -i ~/Pictures/wallpaper/lock/lock.jpg
+            bindsym Escape mode "default"
+    }
+#$mod+alt+l锁屏
+    bindsym $mod+mod1+l mode "i3lock: Return to lock/Escape to Cancel"
+
+
+# ===i3-重载i3配置
+# reload the configuration file
+bindsym $mod+Shift+r reload
+# restart i3 inplace
+bindsym $mod+Shift+s restart
+# exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
