@@ -31,7 +31,7 @@ exec --no-startup-id megasync
 exec --no-startup-id nutstore
 exec --no-startup-id firefox
 exec --no-startup-id ss-qt5
-
+exec --no-startup-id nm-applet
 #===theme===
 
 # wallpaper-设定壁纸图片。
@@ -44,7 +44,7 @@ feh--automatically change wallpaerexec ~/.config/i3/wallpaper.sh &
 exec --no-startup-id xcompmgr &
 
 # font-字体及其大小
-font pango:monospace 18
+font pango:monospace 14
 
 #---bar
 
@@ -69,13 +69,13 @@ bar {
 
 #bar的配色
     colors {
-	background #285477
-	statusline #dedede
-	separator #2d2d2d
-        	focused_workspace #636e88 #285de7 #dedfdg
-        	active_workspace #556677 #234567 #56ef67
-        	inactive_workspace #636d72 #2d2d2d #dedede
-        	urgent_workspace #ffffff #900000 #d23d32
+    background #285477
+    statusline #dedede
+    separator #2d2d2d
+        focused_workspace #636e88 #285de7 #dedfdg
+        active_workspace #556677 #234567 #56ef67
+        inactive_workspace #636d72 #2d2d2d #dedede
+        urgent_workspace #ffffff #900000 #d23d32
     }
 }
 
@@ -135,27 +135,26 @@ bindsym $mod+b border toggle
 focus_follows_mouse yes
 
 # change focus
-bindsym $mod+Shift+h focus left
-bindsym $mod+Shift+j down
-bindsym $mod+Shift+k focus up
-bindsym $mod+Shift+l focus right
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-
-# move focused window-移动焦点窗口
-bindsym $mod+h move left
-bindsym $mod+j move down
-bindsym $mod+k move up
-bindsym $mod+l move right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# move focused window-移动焦点窗口
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+mod1+h split h
@@ -224,13 +223,13 @@ mode "resize" {
     bindsym k resize grow height 10 px or 10 ppt
     bindsym l resize shrink height 10 px or 10 ppt
     bindsym semicolon resize grow width 10 px or 10 ppt
-
+    
     # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
-
+    
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -275,4 +274,3 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+s restart
 # exit i3
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
