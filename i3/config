@@ -5,12 +5,11 @@
 set $mod Mod4
 
 #===autostart parograms===
-
-exec --no-startup-id mate-power-manager
-exec --no-startup-id nm-applet
-exec --no-startup-id xcompmgr &
-exec --no-startup-id fcitx
+#exec --no-startup-id xcompmgr &
+#exec --no-startup-id mate-power-manager
+#exec --no-startup-id nm-applet
 #exec --no-startup-id fcitx
+#exec --no-startup-id ibus
 #exec --no-startup-id megasync
 #exec --no-startup-id redshift
 

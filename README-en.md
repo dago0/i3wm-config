@@ -4,37 +4,47 @@
 
 ![](arch-i3.jpg)
 
-# installation
+# install & configure
 
-- Install `i3wm` 
+## install softwares
 
-  general package name called `i3` , it contains `i3-wm` , `i3lock`and`i3status` .
+- base
 
-- add configs
+  -  `i3wm` : maybe package name called `i3` , it contains `i3-wm` , `i3lock`and`i3status` 
+  -  a terminal  (see [i3wm terminal]( http://jlk.fjfi.cvut.cz/arch/manpages/man/i3-sensible-terminal.1) select a terminal emulator ) 
+  -  `dmenu`  -- A generic menu for X (like a applications launcher)
+  -  `feh`  -- image viewer , for display wallpaper
 
-  - `curl -# -L -o i3.zip https://github.com/levinit/i3wm-config/archive/master.zip && unzip i3.zip && cd i3wm-config-master && cp i3 i3status -t ~/.config -r && cp Pictures ~/ -r`
+- optional
 
-    or
-
-  - Downlod this config and extra ,  put `i3` and `i3status` in`~/.config/` , put `Pictures`(contains some sample wallpapers) in home folder (`~/`)。
-
-- Some softwares 
-
-  - a terminal  (see [i3wm terminal]( http://jlk.fjfi.cvut.cz/arch/manpages/man/i3-sensible-terminal.1) ) 
-
-    - `dmenu`  -- A generic menu for X (like a applications launcher)
-    - `feh`  -- image viewer , for display wallpaper 
-    - `xcompmgr`   --  terminal transparent (optional)
-    - `scrot`  -- for screeshot (optional)
-    - `pcmanfm`  -- a gui file manager(optional)
-    - for laptop  user (optional)
-      - `mate-power-manager`(recommendation)  or other power manager tool  
-      - `alsa-utils`  -- adust volume
-    - for `networkmanager` user  (optional)
+  - `xcompmgr`   --  terminal transparent (recommand)
+  - `scrot`  -- for screeshot (recommand)
+  - `pcmanfm`  -- a gui file manager
+   - for `networkmanager` user
       - `nm-connection-editor`   -- networkmanager GUI
-      - `nm-applet`  -- networkmanager's tray icon
-# Introductions for these config files
+      - `nm-applet`  -- networkmanager's tray icon (recommand)
+  - for laptop  user
+    - `mate-power-manager`  -- power manager tool  
+    - `alsa-utils`  -- adust volume
+
+## configure i3
+
+- Downlod this config and extra ,  put `i3` and `i3status` in`~/.config/` , put `Pictures`(contains some sample wallpapers) in home folder (`~/`).If you want display tray icon , Perhaps you should read the chapter -- ["tray icons"](#tray icons).
+
+or 
+
+- execute this command:
+
+```shell
+curl -# -L -o i3.zip https://github.com/levinit/i3wm-config/archive/master.zip && unzip i3.zip && cd i3wm-config-master && cp i3 i3status -t ~/.config -r && cp Pictures ~/ -r && ./config-en.sh
+```
+
+If it show `xrandr: command not found` , install `xorg-xrandr` , then excute commands above again.
+
+# Introductions for the configs
+
 some info about these config files.
+
 ## shortcuts
 List some shortcut keys that have been changed.
 
@@ -222,6 +232,8 @@ Or you can try these comands for modification:
 name=`xrandr | sed -n '2p' | cut -d ' ' -f 1`
 sed -i 's/eDP1/'"$name"'/' ~/.config/i3/config
 ```
+
+If it show `xrandr: command not found` , install `xorg-xrandr` , then excuted commands above again.
 
 # Others
 

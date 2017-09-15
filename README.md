@@ -4,35 +4,42 @@
 
 ![](arch-i3.jpg)
 
-# 安装
+# 安装配置
 
-- 安装i3wm
+## 安装软件
 
-  其包名也可能叫做i3，包含i3-wm，i3lock和i3status。
-
-- 添加配置文件
-
-  - `curl -# -L -o i3.zip https://github.com/levinit/i3wm-config/archive/master.zip && unzip i3.zip && cd i3wm-config-master && cp i3 i3status -t ~/.config -r && cp Pictures ~/ -r`
-
-  或者
-
-  - 下载本配置文件并解压，将i3和i3status放于`~/.config/`目录，将`Pictures`（包含几张示例壁纸）放于当前用户家目录下（即`~/`下）。
-
-- 需要的软件
-
-  - 适合的终端（参照下文配置-终端）
+- 基本
+  - i3wm ：其包名也可能叫做i3，包含i3-wm，i3lock和i3status。
+  - 适合的终端（参照下文配置-终端 选择一个终端）
   - dmenu  程序启动器
   - feh  设置壁纸
-  - xcompmgr     终端透明（可选）
-  - scrot   截屏（可选，本配置使用的截屏快捷键调用此工具）
-  - pacmanfm    文件管理器（可选）
-  - 笔记本用户（ 可选）
+- 可选
+  - xcompmgr     终端透明（推荐）
+  - scrot   截屏（本配置使用的截屏快捷键调用此工具）
+  - pacmanfm    文件管理器
+  - networkmanager用户
+    - nm-connection-editor  图形界面的联网管理工具
+    - nm-applet  托盘图标（推荐）
+  - 笔记本用户
     - mate-power-manager  电源管理工具
     - alsa-utils   声音管理
-  - networkmanager用户（可选）
-    - nm-connection-editor  图形界面的联网管理工具
-    - nm-applet  托盘图标
+
+## 配置i3
+
+- 下载本配置文件并解压，将i3和i3status放于`~/.config/`目录，将`Pictures`（包含几张示例壁纸）放于当前用户家目录下（即`~/`下）。如果需要显示托盘图标，可能需要参考后面[托盘图标](#托盘图标)一小节的内容进行相关配置。
+
+或者
+
+- 直接执行：
+
+```shell
+curl -# -L -o i3.zip https://github.com/levinit/i3wm-config/archive/master.zip && unzip i3.zip && cd i3wm-config-master && cp i3 i3status -t ~/.config -r && cp Pictures ~/ -r && ./config-zh.sh
+```
+
+如果提示`xrandr: command not found`，则需要先安装`xorg-xrandr`在执行上述命令。
+
 # 本配置的说明
+
 关于本配置的一些重要说明。
 ## 快捷键
 以下列出此配置文件的自定义快捷键的说明，未作更改的其他i3wm的默认快捷键请参阅i3wm相关文档或查看config文件。
@@ -206,21 +213,26 @@
 
 例如我的显示内容有：
 
-```
+```shell
 Screen 0: minimum 8 x 8, current 1920 x 1080, maximum 32767 x 32767
 eDP1 connected 1920x1080+0+0 (normal left inverted right x axis y axis) 310mm x 170mm
 ```
 
+
+
 其中的`eDP1`便是我的显示设备名称。如果你的显示设备名称不是`eDP1` ，那么需要修改`exec --no-startup-id xrandr --output eDP1 --primary`这行中`eDP1`为你的显示设备的名字。
 
-或者你可以尝试使用一下命令自动修改
+或者你可以尝试使用一下命令自动修改：
 
 ```shell
 name=`xrandr | sed -n '2p' | cut -d ' ' -f 1`
 sed -i 's/eDP1/'"$name"'/' ~/.config/i3/config
 ```
 
+如果提示`xrandr: command not found`，则需要先安装`xorg-xrandr`在执行上述命令。
+
 # 其他
+
 - pcmanfm的垃圾桶功能需安装`gvfs`
 - 挂载mtp设备安装`gvfs-mtp`或`libmtp`(参考[archwiki:MTP](https://wiki.archlinux.org/index.php/MTP_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#.E5.AE.89.E8.A3.85))
 - 更改主题可使用lxappearance
