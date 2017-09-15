@@ -1,8 +1,8 @@
 #!/bin/bash
 shopt -s nullglob
  
- # 壁纸放置目录 如需更改壁纸目录请更改~/Pictures/wallpaper为相应的存放目录
-cd ~/Pictures/wallpaper
+ # 壁纸放置目录 如需更改壁纸目录请更改~/Pictures/wallpapers为相应的存放目录
+cd ~/Pictures/wallpapers
 
 while true; do
 	files=()

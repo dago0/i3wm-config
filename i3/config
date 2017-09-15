@@ -8,22 +8,20 @@ set $mod Mod4
 
 exec --no-startup-id mate-power-manager
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift
-exec --no-startup-id fcitx
-exec --no-startup-id megasync
-exec --no-startup-id ss-qt5 &
 exec --no-startup-id xcompmgr &
-
-
+exec --no-startup-id fcitx
+#exec --no-startup-id fcitx
+#exec --no-startup-id megasync
+#exec --no-startup-id redshift
 
 #===appearance===
 
 #---wallpaper---
 
-# single pictures
-#exec --no-startup-id feh --bg-scale "~/Pictures/wallpapaer/wallpaper.jpg"
+# static mode
+#exec --no-startup-id feh --bg-scale "~/Pictures/wallpapers/wallpaper.jpg"
 
-# auto change
+# random mode
 exec ~/.config/i3/wallpaper.sh &
 
 # font
